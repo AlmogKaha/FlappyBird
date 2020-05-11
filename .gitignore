@@ -1,0 +1,10 @@
+node_modules
+build
+npm-debug.log
+.env
+.DS_Store
+node_modules
+.iws
+workspace.xml
+tasks.xml
+.idea
