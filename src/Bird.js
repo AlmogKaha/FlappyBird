@@ -41,8 +41,8 @@ const drawBird = () => {
     birdImage.parentNode.removeChild(birdImage);
     let birdImg = birds[frame%4];
     birdImg.id = "bird";
-    birdImg.style.top = bird.y +"px";
-    birdImg.style.transform = `rotate(${bird.rotate}deg)`;
+    birdImg.style.top = y +"px";
+    birdImg.style.transform = `rotate(${rotate}deg)`;
     let gameBoard = document.getElementById("game");
     gameBoard.appendChild(birdImg);
     frame++;
