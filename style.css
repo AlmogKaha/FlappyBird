@@ -1,14 +1,18 @@
 html, body{
     height: 100%;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.centerDiv {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 #game{
-    background: url("img/background.png");
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +20,7 @@ html, body{
     width: 420px;
     height: 620px;
     background-size: 100%;
-    background-repeat: no-repeat;
+    background: url("img/background.png") no-repeat;
     background-size: cover;
     overflow: hidden;
 }
@@ -35,16 +39,15 @@ html, body{
 }
 
 #floor{
-    background: url("img/floor.png");
     width: 420px;
-    height: 116px;
+    height: 108px;
     position: absolute;
     background-size: contain;
     z-index: 1;
     bottom: 4px;
     left: 0;
-    background-repeat: repeat-x;
-    background-position: 110% 0;
+    bottom: 0;
+    background: url("img/floor.png") repeat-x 110% 0;
     animation: animate 1.5s linear infinite;
 }
 
@@ -147,4 +150,11 @@ html, body{
     top: 42px;
     width: 44px;
     height: 44px;
+}
+
+#startGame {
+    opacity: 0.1%;
+    width: 420px;
+    height: 620px;
+    z-index: 10;
 }

@@ -1,22 +1,26 @@
-class Medal {
-    constructor(minScore, maxScore, color) {
-        this.minScore = minScore;
-        this.color = color;
-        this.maxScore = maxScore;
-    }
-    createMedalElement() {
-        let medalElement = document.createElement("div");
-        medalElement.className = "medal";
-        medalElement.style.backgroundImage = `url('./img/${this.color}Medal.png')`;
-        return medalElement;
-    }
-    static getAllMedals(){
-        return [new Medal(0,19, 'white'), new Medal(20,49, 'bronze'),
-            new Medal(50, 99, 'silver'), new Medal(100, 1000, 'gold')];
-    }
-    static getMedalByScore(score){
-        let allMedals = this.getAllMedals();
-        let medalIndex = allMedals.findIndex(medal => medal.minScore <= score && score <= medal.maxScore);
-        return allMedals[medalIndex].createMedalElement();
-    }
+const medalUpgrade = 20;
+
+let medals = [{color:"white", minScore: 0},
+              {color:"bronze", minScore: medalUpgrade},
+              {color:"silver", minScore: 2 * medalUpgrade},
+              {color:"gold", minScore: 3 * medalUpgrade}];
+
+const createMedalElement = (medal) => {
+    let medalElement = document.createElement("div");
+
+    medalElement.className = "medal";
+    medalElement.style.backgroundImage = `url('./img/${medal.color}Medal.png')`;
+
+    return medalElement;
 }
+
+const getMedalByScore = (score) => {
+    let medalIndex = medals.findIndex(medal => medal.minScore > score);
+
+    if (medalIndex === -1){
+        medalIndex = medals.length;
+    }
+
+    return createMedalElement(medals[medalIndex - 1]);
+}
+

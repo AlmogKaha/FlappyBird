@@ -3,20 +3,22 @@
 <head>
     <title>FlappyHoogi</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko:700">
 </head>
 <body>
-    <div id="game" onclick="startGame()">
-        <div id="score">
+    <div id="startGame" class="centerDiv" onclick="startGame()"></div>
+        <div id="game" onclick="flap()" class="centerDiv">
+            <div id="score">
+            </div>
+            <img id="bird" src="img/hoogiUp.png">
+            <img id="getReady" src="img/getReady.png">
+            <div id="floor">
+            </div>
         </div>
-        <img id="bird" src="img/hoogiUp.png">
-        <img id="getReady" src="img/getReady.png">
-        <div id="floor">
-        </div>
-    </div>
-        <script src="src/Medal.js"></script>
-        <script src="src/Bird.js"></script>
-        <script src="src/Pipe.js"></script>
-        <script src="src/script.js"></script>
+    <script src="src/Score.js"></script>
+    <script src="src/consts.js"></script>
+    <script src="src/Medal.js"></script>
+    <script src="src/Bird.js"></script>
+    <script src="src/Pipe.js"></script>
+    <script src="src/app.js"></script>
 </body>
 </html>

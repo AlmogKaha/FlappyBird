@@ -1,20 +1,23 @@
-let y = 310;
-let radius = 58;
+const startYPosition = 308;
+const rotateAngle = 35;
+
+let y = startYPosition;
+let radius = 60;
 let speed = 0;
 let gravity = 10;
 let jump = 54;
 let rotate = 0;
 let frame = 0;
 
-let minBirdHeight = document.getElementById("game").offsetHeight -
-    document.getElementById("floor").offsetHeight - document.getElementById("bird").offsetHeight;
+let minBirdHeight = gameBoard.offsetHeight -
+    floorElement.offsetHeight - document.getElementById("bird").offsetHeight;
 
-const birds = [document.createElement("img"), document.createElement("img"),
+const birdsImages = [document.createElement("img"), document.createElement("img"),
     document.createElement("img"), document.createElement("img")];
-birds[0].src = "img/hoogiUp.png";
-birds[1].src = "img/hoogiCenter.png";
-birds[2].src = "img/hoogiDown.png";
-birds[3].src = "img/hoogiUp.png";
+birdsImages[0].src = "img/hoogiUp.png";
+birdsImages[1].src = "img/hoogiCenter.png";
+birdsImages[2].src = "img/hoogiDown.png";
+birdsImages[3].src = "img/hoogiUp.png";
 
 const updateBird = () => {
     speed += gravity;
@@ -25,9 +28,9 @@ const updateBird = () => {
         gameOver();
     }
     if(speed > jump){
-        rotate = 35;
+        rotate = rotateAngle;
     } else {
-        rotate = -35;
+        rotate = -rotateAngle;
     }
 }
 
@@ -37,19 +40,17 @@ const flap = () => {
 
 const drawBird = () => {
     updateBird();
-    let birdImage = document.getElementById('bird');
-    birdImage.parentNode.removeChild(birdImage);
-    let birdImg = birds[frame%4];
+    removeElementById('bird');
+    let birdImg = birdsImages[frame%4];
     birdImg.id = "bird";
     birdImg.style.top = y +"px";
     birdImg.style.transform = `rotate(${rotate}deg)`;
-    let gameBoard = document.getElementById("game");
     gameBoard.appendChild(birdImg);
     frame++;
 };
 
 const resetBirdPosition = () => {
-    y = 310;
+    y = startYPosition;
     speed = 0;
     rotate = 0;
 };
