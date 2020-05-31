@@ -20,7 +20,7 @@ const startGame = () => {
     setScore(score, scoreElement);
 
     drawBirdInterval = setInterval(drawBird, 100);
-    pipeInterval = setInterval(drawPipe, drawPipesSpeed);
+    pipeInterval = setInterval(drawPipes, drawPipesSpeed);
 };
 
 const gameOver = () => {
@@ -51,6 +51,7 @@ const createResultsDiv = () => {
 
 const createStartButton = () => {
     let startButtonImg = document.createElement('img');
+
     startButtonImg.src = "img/startButton.png";
     startButtonImg.width = 80;
     startButtonImg.onclick = startGame;
@@ -60,6 +61,7 @@ const createStartButton = () => {
 
 const createGameOverTitle = () => {
     let gameOverTitle = document.createElement('img');
+
     gameOverTitle.src = "img/gameOver.png";
     gameOverTitle.className = "gameOverTitle";
 
@@ -75,6 +77,7 @@ const removeElementById = (...ids) => {
 
 const initGameOverDiv = () => {
     let gameOverDiv = document.createElement('div');
+
     gameOverDiv.id = "gameOver";
 
     gameOverDiv.appendChild(createGameOverTitle());

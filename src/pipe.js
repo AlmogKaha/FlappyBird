@@ -1,11 +1,13 @@
 const pipeFullHeight = 360;
 const spaceBetweenPipes = 180;
+const pipeBodyHeight = 320;
 
-const drawPipe = () => {
+const drawPipes = () => {
     let upPipe = document.createElement("img");
     let downPipe = document.createElement("img");
-    let upPipeTop = -(Math.floor(Math.random() * 320));
+    let upPipeTop = -(Math.floor(Math.random() * pipeBodyHeight));
     let downPipeTop = upPipeTop + pipeFullHeight + spaceBetweenPipes;
+
     upPipe.src = "img/upPipe.png";
     downPipe.src = "img/downPipe.png";
     upPipe.style.top = upPipeTop + "px";
@@ -20,36 +22,33 @@ const drawPipe = () => {
 };
 
 const movePipes = (upPipe, downPipe, upPipeHeight) => {
-    let position = 0;
+    let rightPosition = 0;
     let id = setInterval(frame, 10);
     let downPipeHeight = gameBoard.offsetHeight - floorElement.offsetHeight - upPipeHeight - spaceBetweenPipes;
     pipesIntervals.push(id);
 
     function frame() {
-        if(position === 420){
+
+        if(rightPosition === gameBoard.offsetWidth){
             clearInterval(id);
             upPipe.parentNode.removeChild(upPipe);
             downPipe.parentNode.removeChild(downPipe);
         } else if(checkPipeCollision(upPipe, upPipeHeight) || checkPipeCollision(downPipe, downPipeHeight)){
             gameOver();
-        } else if(birdSucceededToPass(position)){
-            score++;
-            clearScore();
-            setScore(score, document.getElementById("score"));
+        } else if(birdSucceededToPass(rightPosition)){
+            increaseScore();
         }
 
-        position++;
-        upPipe.style.right = position + 'px';
-        downPipe.style.right = position + 'px';
+        rightPosition++;
+        upPipe.style.right = rightPosition + 'px';
+        downPipe.style.right = rightPosition + 'px';
     }
 }
 
 const removeRemainingPipes = () => {
     let pipes = document.getElementsByClassName("pipe");
 
-    while (pipes[0]){
-        pipes[0].parentNode.removeChild(pipes[0]);
-    }
+    Array.from(pipes).forEach(pipe => pipe.parentNode.removeChild(pipe));
 };
 
 const checkPipeCollision = (element, elementHeight) => {
@@ -57,18 +56,12 @@ const checkPipeCollision = (element, elementHeight) => {
     let birdLocation = document.getElementById("bird").getBoundingClientRect();
 
     let distX = Math.abs(birdLocation.left - pipe.left - pipe.width/2);
-    let distY = Math.abs((birdLocation.top- 28) - pipe.top - elementHeight/2);
-
-    if (distX > (pipe.width/2 + radius)) { return false; }
-    if (distY > (elementHeight/2 + radius)) { return false; }
-
-    if (distX <= (pipe.width/2)) { return true; }
-    if (distY <= (elementHeight/2)) { return true; }
+    let distY = Math.abs((birdLocation.top) - pipe.top - elementHeight/2);
 
     let dx=distX-pipe.width/2;
     let dy=distY-elementHeight/2;
 
-    return (dx*dx+dy*dy<=(radius*radius));
+    return (dx*dx+dy*dy<=(birdRadius*birdRadius));
 };
 
-const birdSucceededToPass = (position) => (position === 420 - document.getElementById("bird").offsetLeft + 1);
+const birdSucceededToPass = position => (position === gameBoard.offsetWidth - document.getElementById("bird").offsetLeft + 1);

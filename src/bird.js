@@ -1,11 +1,10 @@
 const startYPosition = 308;
 const rotateAngle = 35;
+const gravity = 10;
+const jump = 54;
 
 let y = startYPosition;
-let radius = 60;
 let speed = 0;
-let gravity = 10;
-let jump = 54;
 let rotate = 0;
 let frame = 0;
 
@@ -21,13 +20,14 @@ birdsImages[3].src = "img/hoogiUp.png";
 
 const updateBird = () => {
     speed += gravity;
-    if(y + speed < minBirdHeight){
+
+    if (y + speed < minBirdHeight) {
         y += speed;
     } else {
         y = minBirdHeight;
         gameOver();
     }
-    if(speed > jump){
+    if (speed > jump) {
         rotate = rotateAngle;
     } else {
         rotate = -rotateAngle;
@@ -41,10 +41,13 @@ const flap = () => {
 const drawBird = () => {
     updateBird();
     removeElementById('bird');
-    let birdImg = birdsImages[frame%4];
+
+    let birdImg = birdsImages[frame % 4];
+
     birdImg.id = "bird";
-    birdImg.style.top = y +"px";
+    birdImg.style.top = y + "px";
     birdImg.style.transform = `rotate(${rotate}deg)`;
+
     gameBoard.appendChild(birdImg);
     frame++;
 };

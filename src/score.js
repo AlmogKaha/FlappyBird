@@ -25,9 +25,16 @@ const clearScore = () => {
 
 const createScoreDiv = (scoreType, score) => {
     let scoreDiv = document.createElement('div');
+
     scoreDiv.id = scoreType;
     scoreDiv.className = 'scoreDetails';
     setScore(score, scoreDiv);
 
     return scoreDiv;
+}
+
+const increaseScore = () => {
+    score++;
+    clearScore();
+    setScore(score, document.getElementById("score"));
 }
